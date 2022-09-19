@@ -20,10 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
 
-// Wildcard route to direct users to a 404 page
-app.get('/', (req, res) =>
-  res.sendFile(path.join(__dirname, './public/index.html'))
-);
+
 // GET Route for homepage
 app.get('/notes', (req, res) =>
   res.sendFile(path.join(__dirname, './public/notes.html'))
@@ -79,6 +76,10 @@ app.delete("/api/notes/:id", (req, res) => {
   })
 })
 
+// Wildcard route to direct users home
+app.get('*', (req, res) =>
+  res.sendFile(path.join(__dirname, './public/index.html'))
+);
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT} 🚀`)
 );
