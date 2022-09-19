@@ -4,6 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 const notes = './db/db.json'
 const { readFromFile, writeToFile, readAndAppend } = require('./helpers/fsUtils');
+const { appendFileSync } = require('fs');
 
 
 const PORT = process.env.PORT || 3001;
@@ -40,7 +41,7 @@ app.post('/api/notes', (req, res) => {
     const newNote = {
       title,
       text,
-      note_id: uuidv4(),
+      id: uuidv4(),
     };
 
     readAndAppend(newNote,notes);
@@ -49,6 +50,19 @@ app.post('/api/notes', (req, res) => {
     res.errored('Error adding note.')
   }
 });
+
+app.delete("/api/notes/:id", (req, res) => {
+  const noteId = req.params.id;
+  console.log(`note id variable: ${noteId}`)
+  readFromFile(notes)
+  .then((data)=>JSON.parse(data))
+  .then((json)=> {
+    const result = json.filter((note) => note.id !== noteId);
+    console.log(result)
+    writeToFile(notes, result);
+    res.json(`Note ${noteId} has been deleted`)
+  })
+})
 
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT} 🚀`)

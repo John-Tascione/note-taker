@@ -1,16 +1,12 @@
 [
     {
-        "title": "Test Title",
-        "text": "Test text"
-    },
-    {
         "title": "Test Note",
         "text": "Sample text for note",
-        "note_id": "dbe00c79-7ed7-4dc9-a7d5-b9f178d3655e"
+        "id": "dbe00c79-7ed7-4dc9-a7d5-b9f178d3655e"
     },
     {
         "title": "Retest",
         "text": "Additional test Note",
-        "note_id": "58cb1485-d5a6-43f0-98fe-4a482ec1d2f8"
+        "id": "58cb1485-d5a6-43f0-98fe-4a482ec1d2f8"
     }
 ]
