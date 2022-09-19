@@ -28,10 +28,13 @@ app.get('/', (req, res) =>
 app.get('/notes', (req, res) =>
   res.sendFile(path.join(__dirname, './public/notes.html'))
 );
+
+// Route to render all notes
 app.get('/api/notes', (req, res) => {
     readFromFile(notes).then((data) => res.json(JSON.parse(data)));
 })
 
+// Route to create a new note
 app.post('/api/notes', (req, res) => {
   console.log(req.body);
 
@@ -51,6 +54,18 @@ app.post('/api/notes', (req, res) => {
   }
 });
 
+// Route to open an existing note
+app.get(notes, (req,res) => {
+  const noteId = req.params.id;
+  readFromFile(notes)
+  .then((data) => JSON.parse(data))
+  .then((json) => {
+    const result = json.filter((note) => note.id === noteId);
+    return result.length > 0 ? res.json(result) : res.json('No note found')
+  });
+});
+
+// Route to delete a note
 app.delete("/api/notes/:id", (req, res) => {
   const noteId = req.params.id;
   console.log(`note id variable: ${noteId}`)
