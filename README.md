@@ -18,7 +18,7 @@ N/A
 
 ## Usage
 
-See the published site: [here]()
+See the published site: [here](https://note-taker-jat.herokuapp.com/)
 - To use the app, open the home page and click the Get Started button to open the notes page.
     - The note page will automatically render existing notes from the JSON file on the left hand column in a card with the title visible.
     - To see further details about an existing note click on the notes card. Once this is done the full note will render on the rigth.
